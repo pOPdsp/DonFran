@@ -1,1147 +1,723 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-<meta name="description" content="Don Fran Restaurante — Steak & Grill en Liberia, Guanacaste. Reserva tu mesa hoy."/>
-<meta property="og:title" content="Don Fran Restaurante · Liberia, Guanacaste"/>
-<meta property="og:description" content="La mejor carne a la parrilla de Guanacaste. Reserva tu mesa online."/>
-<meta property="og:image" content="https://i.imgur.com/placeholder.jpg"/>
-<title>Don Fran Restaurante · Liberia, Guanacaste</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --gold:#C9A84C;--gold-lt:#E8CC80;--gold-dk:#9A6F2A;
-  --cream:#F7F2E8;--cream-dk:#EDE5D0;
-  --bg:#1A1612;--bg2:#231E16;--bg3:#2C2519;
-  --white:#FDFAF4;
-  --radius:6px;
-}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--cream);font-family:'Montserrat',sans-serif;font-weight:300;letter-spacing:.04em;overflow-x:hidden}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-button{font-family:'Montserrat',sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Don Fran Restaurante — Liberia, Guanacaste</title>
+  <meta name="description" content="Carnes a la parrilla, mariscos frescos y hamburguesas gourmet en Liberia, Guanacaste. Reservaciones y eventos privados. +506 7108 2151.">
+  <meta property="og:title"       content="Don Fran Restaurante — Liberia, Guanacaste">
+  <meta property="og:description" content="El mejor asado de Guanacaste. Reservá tu mesa o tu evento privado hoy.">
+  <meta property="og:type"        content="restaurant">
 
-/* ═══════════════════════════════════════
-   UTILIDADES
-══════════════════════════════════════ */
-.hidden{display:none!important}
-.gold{color:var(--gold)}
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 
-/* ═══════════════════════════════════════
-   NAV OVERLAY + DRAWERS
-══════════════════════════════════════ */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .35s;z-index:850}
-.overlay.open{opacity:1;pointer-events:all}
-
-/* Nav lateral mobile */
-.side-nav{
-  position:fixed;top:0;left:-100%;width:min(300px,85vw);height:100dvh;
-  background:var(--bg2);border-right:1px solid rgba(201,168,76,.2);
-  padding:5rem 2rem 2rem;z-index:900;transition:left .4s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;gap:2rem;
-}
-.side-nav.open{left:0}
-.side-nav a{font-size:.82rem;letter-spacing:.25em;text-transform:uppercase;color:var(--cream);padding:.3rem 0;border-bottom:1px solid rgba(201,168,76,.1);transition:color .25s}
-.side-nav a:active{color:var(--gold)}
-.side-nav-close{position:absolute;top:1.4rem;right:1.4rem;background:none;border:none;font-size:1.3rem;color:var(--gold-lt)}
-
-/* Carrito drawer */
-.cart-drawer{
-  position:fixed;top:0;right:-100%;width:min(380px,93vw);height:100dvh;
-  background:var(--bg2);border-left:1px solid rgba(201,168,76,.2);
-  padding:1.6rem 1.4rem;z-index:900;transition:right .4s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;gap:1.1rem;overflow-y:auto;
-}
-.cart-drawer.open{right:0}
-.cart-drawer-head{font-family:'Cormorant Garamond',serif;font-size:1.4rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;border-bottom:1px solid rgba(201,168,76,.2);padding-bottom:.8rem;display:flex;justify-content:space-between;align-items:center}
-.cart-drawer-close{background:none;border:none;font-size:1.2rem;color:var(--gold-lt)}
-.cart-empty-msg{font-size:.72rem;letter-spacing:.1em;color:var(--cream-dk);line-height:2}
-.cart-items-list{flex:1;display:flex;flex-direction:column;gap:.8rem}
-.cart-item{display:flex;align-items:flex-start;gap:.8rem;border-bottom:1px solid rgba(201,168,76,.1);padding-bottom:.8rem}
-.cart-item-info{flex:1}
-.cart-item-name{font-size:.73rem;letter-spacing:.07em;color:var(--cream);margin-bottom:.2rem}
-.cart-item-price{font-size:.7rem;color:var(--gold)}
-.cart-item-rm{background:none;border:none;font-size:.6rem;letter-spacing:.1em;color:rgba(201,168,76,.5);margin-top:.3rem;display:block;padding:0}
-.cart-total-row{border-top:1px solid rgba(201,168,76,.2);padding-top:.8rem;display:flex;justify-content:space-between;font-size:.8rem;letter-spacing:.12em;color:var(--gold-lt)}
-.btn-checkout{display:block;width:100%;padding:.9rem;background:var(--gold);color:var(--bg);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;border:none;transition:background .25s}
-.btn-checkout:active{background:var(--gold-lt)}
-
-/* ═══════════════════════════════════════
-   TOPBAR NAV
-══════════════════════════════════════ */
-.topbar{
-  position:fixed;top:0;left:0;right:0;z-index:800;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.9rem 1.2rem;
-  background:rgba(26,22,18,.96);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(201,168,76,.14);
-}
-.topbar-hamburger{background:none;border:none;padding:.3rem;display:flex;flex-direction:column;gap:5px}
-.topbar-hamburger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:all .3s}
-.topbar-logo{
-  font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;
-  letter-spacing:.35em;color:var(--gold);text-transform:uppercase;line-height:1.1;text-align:center;
-}
-.topbar-logo small{display:block;font-size:.44rem;letter-spacing:.55em;color:var(--gold-lt);margin-top:1px}
-.topbar-right{display:flex;align-items:center;gap:.8rem}
-.topbar-cart{background:none;border:none;display:flex;align-items:center;gap:.4rem;color:var(--cream);padding:.3rem}
-.topbar-cart svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.cart-badge{font-size:.6rem;letter-spacing:.12em;color:var(--gold-lt);border:1px solid rgba(201,168,76,.35);padding:1px 5px;min-width:28px;text-align:center}
-
-/* ═══════════════════════════════════════
-   HERO
-══════════════════════════════════════ */
-.hero{min-height:100dvh;position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
-.hero-bg{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(26,22,18,.25) 0%,rgba(26,22,18,.85) 100%),
-    url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1400&q=80') center/cover no-repeat;
-  animation:heroZoom 20s ease-in-out infinite alternate;
-}
-@keyframes heroZoom{from{transform:scale(1.03)}to{transform:scale(1.09)}}
-.hero-content{position:relative;text-align:center;padding:0 1.5rem 7rem;width:100%;animation:fadeUp 1.3s ease both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.hero-eyebrow{font-size:.56rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;display:flex;align-items:center;justify-content:center;gap:.7rem}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:inline-block;width:22px;height:1px;background:var(--gold)}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,20vw,6rem);font-weight:300;letter-spacing:.2em;line-height:.95;color:var(--white);text-transform:uppercase;margin-bottom:.8rem}
-.hero-sub{font-size:.6rem;letter-spacing:.35em;color:var(--gold-lt);text-transform:uppercase;margin-bottom:2.4rem;line-height:1.8}
-.hero-actions{display:flex;flex-direction:column;gap:.8rem;align-items:center}
-.btn-primary{display:inline-block;padding:.9rem 2.6rem;background:var(--gold);color:var(--bg);font-size:.65rem;letter-spacing:.26em;text-transform:uppercase;border:none;transition:background .25s;font-family:'Montserrat',sans-serif}
-.btn-primary:active{background:var(--gold-lt)}
-.btn-outline{display:inline-block;padding:.85rem 2.4rem;border:1px solid rgba(201,168,76,.55);color:var(--gold);font-size:.65rem;letter-spacing:.26em;text-transform:uppercase;transition:all .25s;font-family:'Montserrat',sans-serif;background:transparent}
-.btn-outline:active{background:rgba(201,168,76,.12)}
-
-/* ═══════════════════════════════════════
-   INFO STRIP
-══════════════════════════════════════ */
-.info-strip{display:grid;grid-template-columns:1fr 1fr;background:var(--bg2)}
-@media(min-width:640px){.info-strip{grid-template-columns:repeat(4,1fr)}}
-.info-cell{padding:1.4rem 1rem;border-right:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1)}
-.info-cell:last-child{border-right:none}
-.info-cell-icon{font-size:1rem;margin-bottom:.5rem;opacity:.75}
-.info-cell-label{font-size:.5rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
-.info-cell-val{font-family:'Cormorant Garamond',serif;font-size:.92rem;color:var(--white);letter-spacing:.06em;line-height:1.5}
-
-/* ═══════════════════════════════════════
-   SECTION HEADERS
-══════════════════════════════════════ */
-.sec-header{text-align:center;padding:4.5rem 1.5rem 2.5rem}
-.sec-badge{font-size:.54rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;justify-content:center;gap:.7rem}
-.sec-badge::before,.sec-badge::after{content:'';display:inline-block;width:20px;height:1px;background:var(--gold-dk)}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,10vw,3.2rem);font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:var(--white)}
-
-/* ═══════════════════════════════════════
-   MENU FILTERS
-══════════════════════════════════════ */
-.menu-filters{display:flex;overflow-x:auto;gap:.5rem;padding:.5rem 1.2rem 1.2rem;scrollbar-width:none}
-.menu-filters::-webkit-scrollbar{display:none}
-.filter-btn{flex-shrink:0;padding:.45rem 1.1rem;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;background:transparent;border:1px solid rgba(201,168,76,.25);color:var(--cream-dk);border-radius:100px;transition:all .25s;white-space:nowrap}
-.filter-btn.active{background:var(--gold);color:var(--bg);border-color:var(--gold)}
-
-/* ═══════════════════════════════════════
-   MENU GRID
-══════════════════════════════════════ */
-.menu-grid{display:grid;grid-template-columns:1fr;gap:2px;padding:0 0 2px}
-@media(min-width:560px){.menu-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:960px){.menu-grid{grid-template-columns:repeat(3,1fr);max-width:1300px;margin:0 auto}}
-
-.menu-card{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--bg3);cursor:pointer}
-@media(min-width:560px){.menu-card{aspect-ratio:1/1}}
-.menu-card img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.4,0,.2,1),filter .55s;filter:brightness(.8) saturate(.88)}
-.menu-card:hover img{transform:scale(1.07);filter:brightness(.55) saturate(.75)}
-.menu-card-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,22,18,.95) 0%,rgba(26,22,18,.05) 55%)}
-.menu-card-body{position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.1rem}
-.menu-card-cat{font-size:.52rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
-.menu-card-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;letter-spacing:.07em;color:var(--white);line-height:1.2;margin-bottom:.35rem}
-.menu-card-desc{font-size:.62rem;letter-spacing:.05em;color:var(--cream-dk);line-height:1.75;margin-bottom:.9rem;display:none}
-.menu-card.expanded .menu-card-desc{display:block}
-.menu-card-foot{display:flex;justify-content:space-between;align-items:center}
-.menu-card-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold-lt)}
-.btn-add{padding:.38rem .9rem;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;background:transparent;border:1px solid rgba(201,168,76,.4);color:var(--gold);transition:all .25s;font-family:'Montserrat',sans-serif}
-.btn-add:active,.menu-card:hover .btn-add{background:var(--gold);color:var(--bg);border-color:var(--gold)}
-
-/* ═══════════════════════════════════════
-   BANNER CTA
-══════════════════════════════════════ */
-.banner-cta{position:relative;min-height:280px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:4rem 0}
-.banner-cta-bg{position:absolute;inset:0;background:linear-gradient(rgba(26,22,18,.6),rgba(26,22,18,.6)),url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80') center/cover}
-.banner-cta-inner{position:relative;text-align:center;padding:2.5rem 1.8rem}
-.banner-cta-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,6vw,2.4rem);font-style:italic;color:var(--white);letter-spacing:.06em;line-height:1.45;margin-bottom:1.2rem}
-.banner-cta-attr{font-size:.54rem;letter-spacing:.38em;color:var(--gold);text-transform:uppercase;margin-bottom:1.8rem}
-
-/* ═══════════════════════════════════════
-   GALERÍA / EXPERIENCIAS
-══════════════════════════════════════ */
-.gallery-scroll{display:flex;overflow-x:auto;gap:2px;padding:0 0 2px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.gallery-scroll::-webkit-scrollbar{display:none}
-.gallery-card{flex:0 0 72vw;max-width:260px;scroll-snap-align:start;position:relative;aspect-ratio:3/4;overflow:hidden}
-.gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
-.gallery-card:active img{transform:scale(1.05)}
-.gallery-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,22,18,.9) 0%,transparent 50%)}
-.gallery-card-body{position:absolute;bottom:1.1rem;left:1.1rem;right:1.1rem}
-.gallery-card-tag{font-size:.5rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
-.gallery-card-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--white);letter-spacing:.06em;line-height:1.2}
-.scroll-hint{font-size:.54rem;letter-spacing:.22em;color:rgba(201,168,76,.5);text-transform:uppercase;padding:.5rem 1.2rem;display:flex;gap:.5rem}
-
-/* ═══════════════════════════════════════
-   ABOUT
-══════════════════════════════════════ */
-.about-section{padding:4rem 1.4rem}
-.about-img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;margin-bottom:2.2rem}
-@media(min-width:768px){
-  .about-section{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto}
-  .about-img{aspect-ratio:4/5;margin-bottom:0}
-}
-.about-eyebrow{font-size:.54rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
-.about-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,8vw,2.8rem);font-weight:300;letter-spacing:.1em;line-height:1.1;color:var(--white);text-transform:uppercase;margin-bottom:1.2rem}
-.about-line{width:36px;height:1px;background:var(--gold-dk);margin-bottom:1.2rem}
-.about-text{font-size:.73rem;line-height:2.1;letter-spacing:.06em;color:var(--cream-dk);margin-bottom:1rem}
-.about-link{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px}
-
-/* ═══════════════════════════════════════
-   RESERVACIONES SECTION
-══════════════════════════════════════ */
-.res-section{padding:4rem 1.4rem;background:var(--bg2)}
-.res-tabs{display:flex;gap:.5rem;margin-bottom:2rem;border-bottom:1px solid rgba(201,168,76,.15);padding-bottom:0}
-.res-tab{padding:.7rem 1.2rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;background:transparent;border:none;color:var(--cream-dk);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .25s}
-.res-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
-.res-form-wrap{background:var(--bg3);padding:1.8rem 1.4rem;max-width:500px;margin:0 auto}
-.form-row{margin-bottom:1.2rem}
-.form-label{display:block;font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
-.form-input{width:100%;padding:.8rem 1rem;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);color:var(--cream);font-family:'Montserrat',sans-serif;font-size:.75rem;letter-spacing:.05em;outline:none;transition:border .25s;border-radius:var(--radius)}
-.form-input:focus{border-color:rgba(201,168,76,.5)}
-.form-input::placeholder{color:rgba(247,242,232,.3)}
-.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-.form-select{width:100%;padding:.8rem 1rem;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);color:var(--cream);font-family:'Montserrat',sans-serif;font-size:.75rem;outline:none;border-radius:var(--radius);appearance:none;-webkit-appearance:none}
-.form-select option{background:var(--bg2);color:var(--cream)}
-.form-textarea{width:100%;padding:.8rem 1rem;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);color:var(--cream);font-family:'Montserrat',sans-serif;font-size:.75rem;letter-spacing:.05em;outline:none;border-radius:var(--radius);resize:vertical;min-height:90px}
-.form-textarea:focus{border-color:rgba(201,168,76,.5)}
-.form-submit{width:100%;padding:1rem;background:var(--gold);color:var(--bg);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;border:none;margin-top:.5rem;font-family:'Montserrat',sans-serif;font-weight:500;transition:background .25s}
-.form-submit:active{background:var(--gold-lt)}
-.res-success{display:none;text-align:center;padding:2rem 1rem}
-.res-success-icon{font-size:2.5rem;margin-bottom:1rem}
-.res-success-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold);margin-bottom:.6rem;letter-spacing:.12em}
-.res-success-text{font-size:.72rem;color:var(--cream-dk);line-height:2;letter-spacing:.06em}
-
-/* ═══════════════════════════════════════
-   FOOTER
-══════════════════════════════════════ */
-footer{background:var(--bg2);border-top:1px solid rgba(201,168,76,.15);padding:3.5rem 1.4rem 2rem}
-.foot-logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:.4rem}
-.foot-tagline{font-size:.62rem;letter-spacing:.18em;color:var(--cream-dk);line-height:2;margin-bottom:1.4rem}
-.foot-social{display:flex;gap:1.2rem;margin-bottom:2.5rem}
-.foot-social a{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.foot-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem}
-@media(min-width:640px){.foot-grid{grid-template-columns:repeat(3,1fr)}}
-.foot-col-title{font-size:.54rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px solid rgba(201,168,76,.15)}
-.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
-.foot-col ul li a{font-size:.65rem;letter-spacing:.09em;color:var(--cream-dk)}
-.foot-addr{font-size:.65rem;letter-spacing:.08em;color:var(--cream-dk);line-height:2.1;font-style:normal}
-.foot-bottom{border-top:1px solid rgba(201,168,76,.1);padding-top:1.4rem;display:flex;flex-direction:column;gap:.6rem}
-@media(min-width:560px){.foot-bottom{flex-direction:row;justify-content:space-between;align-items:center}}
-.foot-copy{font-size:.54rem;letter-spacing:.12em;color:rgba(247,242,232,.28)}
-.foot-legal{display:flex;gap:1.2rem}
-.foot-legal a{font-size:.54rem;letter-spacing:.12em;color:rgba(247,242,232,.28)}
-
-/* ═══════════════════════════════════════
-   WHATSAPP FLOAT
-══════════════════════════════════════ */
-.wa-float{
-  position:fixed;bottom:1.3rem;right:1.3rem;z-index:700;
-  width:52px;height:52px;border-radius:50%;background:#25D366;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 16px rgba(0,0,0,.4);transition:transform .2s;
-}
-.wa-float:active{transform:scale(.92)}
-.wa-float svg{width:26px;height:26px;fill:#fff}
-
-/* ═══════════════════════════════════════
-   TOAST
-══════════════════════════════════════ */
-.toast{
-  position:fixed;bottom:1.3rem;left:50%;transform:translateX(-50%) translateY(70px);
-  background:var(--gold);color:var(--bg);font-size:.63rem;letter-spacing:.18em;
-  text-transform:uppercase;padding:.65rem 1.8rem;opacity:0;
-  transition:all .38s cubic-bezier(.4,0,.2,1);z-index:999;white-space:nowrap;pointer-events:none;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ═══════════════════════════════════════
-   ADMIN PANEL — pantalla completa separada
-══════════════════════════════════════ */
-#admin-panel{
-  position:fixed;inset:0;background:var(--bg);z-index:9999;
-  display:none;flex-direction:column;overflow:hidden;
-}
-#admin-panel.open{display:flex}
-.admin-topbar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 1.4rem;background:var(--bg2);
-  border-bottom:1px solid rgba(201,168,76,.2);flex-shrink:0;
-}
-.admin-topbar-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
-.admin-close{background:none;border:none;color:var(--gold-lt);font-size:1.1rem}
-.admin-body{flex:1;overflow-y:auto;padding:1.4rem}
-.admin-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;overflow-x:auto;scrollbar-width:none}
-.admin-tabs::-webkit-scrollbar{display:none}
-.admin-tab{flex-shrink:0;padding:.5rem 1rem;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;background:transparent;border:1px solid rgba(201,168,76,.2);color:var(--cream-dk);transition:all .25s;border-radius:100px}
-.admin-tab.active{background:var(--gold);color:var(--bg);border-color:var(--gold)}
-.admin-section{display:none}
-.admin-section.active{display:block}
-.admin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1.8rem}
-.stat-card{background:var(--bg2);padding:1rem;border:1px solid rgba(201,168,76,.12);text-align:center}
-.stat-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold);letter-spacing:.1em}
-.stat-label{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dk);margin-top:.2rem}
-.res-card{background:var(--bg2);border:1px solid rgba(201,168,76,.12);padding:1.1rem;margin-bottom:.8rem;border-radius:var(--radius)}
-.res-card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.7rem;gap:.5rem}
-.res-card-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--white);letter-spacing:.07em}
-.res-card-type{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px}
-.type-mesa{background:rgba(201,168,76,.15);color:var(--gold)}
-.type-evento{background:rgba(99,153,34,.15);color:#7dc443}
-.res-card-details{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;margin-bottom:.9rem}
-.res-detail{font-size:.62rem;letter-spacing:.06em;color:var(--cream-dk)}
-.res-detail strong{color:var(--cream);font-weight:400}
-.res-card-status{display:flex;align-items:center;gap:.5rem;margin-bottom:.9rem}
-.status-badge{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;padding:.25rem .8rem;border-radius:100px}
-.status-pending{background:rgba(239,159,39,.15);color:#EF9F27}
-.status-confirmed{background:rgba(99,153,34,.15);color:#7dc443}
-.status-cancelled{background:rgba(226,75,74,.15);color:#E24B4A}
-.res-card-actions{display:flex;gap:.6rem;flex-wrap:wrap}
-.btn-confirm{padding:.5rem 1rem;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold);color:var(--bg);border:none;font-family:'Montserrat',sans-serif;transition:background .2s;border-radius:var(--radius)}
-.btn-cancel-res{padding:.5rem 1rem;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:rgba(226,75,74,.8);border:1px solid rgba(226,75,74,.3);font-family:'Montserrat',sans-serif;border-radius:var(--radius)}
-.btn-wa-client{display:flex;align-items:center;gap:.4rem;padding:.5rem 1rem;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;background:#25D366;color:#fff;border:none;font-family:'Montserrat',sans-serif;border-radius:var(--radius)}
-.btn-wa-client svg{width:14px;height:14px;fill:#fff;flex-shrink:0}
-.admin-menu-grid{display:flex;flex-direction:column;gap:.8rem}
-.admin-menu-item{background:var(--bg2);border:1px solid rgba(201,168,76,.12);padding:1rem 1.1rem;display:flex;align-items:center;gap:1rem;border-radius:var(--radius)}
-.admin-menu-item img{width:56px;height:56px;object-fit:cover;flex-shrink:0;border-radius:4px}
-.admin-menu-item-info{flex:1;min-width:0}
-.admin-menu-item-name{font-size:.75rem;letter-spacing:.08em;color:var(--cream);margin-bottom:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.admin-menu-item-cat{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
-.admin-price-input{width:100%;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);color:var(--gold-lt);font-family:'Montserrat',sans-serif;font-size:.75rem;padding:.35rem .6rem;border-radius:4px;outline:none;max-width:130px}
-.btn-save-price{padding:.35rem .7rem;font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;background:var(--gold);color:var(--bg);border:none;font-family:'Montserrat',sans-serif;border-radius:4px;margin-left:.5rem;white-space:nowrap}
-.admin-empty{text-align:center;padding:3rem 1rem;font-size:.72rem;color:var(--cream-dk);letter-spacing:.1em;line-height:2}
-.admin-login{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;padding:2rem}
-.admin-login-box{background:var(--bg2);border:1px solid rgba(201,168,76,.2);padding:2.5rem 2rem;width:100%;max-width:340px}
-.admin-login-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1.6rem}
-.admin-login-err{font-size:.65rem;color:#E24B4A;letter-spacing:.08em;text-align:center;margin-top:.8rem;display:none}
-
-/* Notif dot */
-.notif-dot{display:inline-block;width:7px;height:7px;background:#E24B4A;border-radius:50%;margin-left:.35rem;vertical-align:middle;animation:pulse 1.8s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-</style>
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ═══ OVERLAYS ══════════════════════════ -->
-<div class="overlay" id="sideNavOverlay" onclick="closeSideNav()"></div>
-<div class="overlay" id="cartOverlay" onclick="closeCart()"></div>
+<!-- ══════════════════════════════════
+     NAV
+══════════════════════════════════ -->
+<nav id="nav" aria-label="Navegación principal">
+  <a href="#hero" class="nav-logo" aria-label="Don Fran Restaurante — Inicio">
+    <b>Don Fran</b>
+    <small>Restaurante · Liberia, Guanacaste</small>
+  </a>
 
-<!-- ═══ SIDE NAV ═══════════════════════════ -->
-<nav class="side-nav" id="sideNav">
-  <button class="side-nav-close" onclick="closeSideNav()">✕</button>
-  <a href="#menu" onclick="closeSideNav()">Menú</a>
-  <a href="#experiencias" onclick="closeSideNav()">Experiencias</a>
-  <a href="#nosotros" onclick="closeSideNav()">Nosotros</a>
-  <a href="#reservaciones" onclick="closeSideNav()">Reservaciones</a>
-  <a href="javascript:void(0)" onclick="closeSideNav();openAdmin()" style="color:rgba(201,168,76,.45);font-size:.6rem;margin-top:auto">Panel Admin</a>
-</nav>
+  <ul class="nav-links" role="list">
+    <li><a href="#nosotros">Quiénes somos</a></li>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#reservaciones">Reservaciones</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+    <li><a href="#reservaciones" class="nav-cta">Reservar mesa</a></li>
+  </ul>
 
-<!-- ═══ CART DRAWER ════════════════════════ -->
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-drawer-head">
-    Canasta
-    <button class="cart-drawer-close" onclick="closeCart()">✕</button>
-  </div>
-  <div class="cart-items-list" id="cartItemsList">
-    <p class="cart-empty-msg">Tu canasta está vacía.<br>Explora nuestro menú y agrega tus favoritos.</p>
-  </div>
-  <div class="cart-total-row hidden" id="cartTotalRow">
-    <span>Total</span><span id="cartTotalAmt">₡0</span>
-  </div>
-  <button class="btn-checkout hidden" id="btnCheckout" onclick="sendCartWA()">Ordenar por WhatsApp</button>
-</div>
-
-<!-- ═══ TOPBAR ══════════════════════════════ -->
-<header class="topbar">
-  <button class="topbar-hamburger" onclick="openSideNav()" aria-label="Menú">
+  <button class="ham" id="ham" aria-label="Abrir menú" aria-expanded="false" aria-controls="mob-nav">
     <span></span><span></span><span></span>
   </button>
-  <a href="#" class="topbar-logo">Don Fran<small>Liberia · Guanacaste</small></a>
-  <div class="topbar-right">
-    <button class="topbar-cart" onclick="openCart()" aria-label="Ver carrito">
-      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <span class="cart-badge" id="cartBadge">00</span>
-    </button>
-  </div>
-</header>
+</nav>
 
-<!-- ═══ HERO ════════════════════════════════ -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">Liberia · Guanacaste · Costa Rica</p>
-    <h1 class="hero-title">Don Fran</h1>
-    <p class="hero-sub">Steak &amp; Grill — Alta Cocina Costarricense</p>
+<!-- Menú móvil -->
+<nav id="mob-nav" aria-label="Menú móvil">
+  <a href="#nosotros"     class="ml">Quiénes somos</a>
+  <a href="#menu"         class="ml">Menú</a>
+  <a href="#reservaciones" class="ml">Reservaciones</a>
+  <a href="#eventos"      class="ml">Eventos privados</a>
+  <a href="#ubicacion"    class="ml">Ubicación</a>
+  <a href="#reservaciones" class="mob-cta ml">Reservar mesa →</a>
+</nav>
+
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section id="hero" aria-label="Portada Don Fran Restaurante">
+  <div class="hero-bg" role="img" aria-label="Parrilla encendida en Don Fran Restaurante"></div>
+
+  <div class="hero-wrap">
+    <div class="hero-chip">
+      <span class="dot"></span>
+      Liberia · Guanacaste · Costa Rica
+    </div>
+
+    <h1>El sabor que<br>Guanacaste<br>recuerda</h1>
+
+    <p class="hero-sub">
+      Carnes a la parrilla, mariscos frescos y la hospitalidad de siempre.
+      En el corazón de Liberia desde hace años.
+    </p>
+
     <div class="hero-actions">
-      <a href="#reservaciones" class="btn-primary">Reservar Mesa</a>
-      <a href="#menu" class="btn-outline">Ver Menú</a>
+      <a href="#menu"          class="hero-btn-main">Ver el menú</a>
+      <a href="#reservaciones" class="hero-btn-ghost">Reservar mesa →</a>
     </div>
+
+    <div class="hero-stats">
+      <div class="hstat"><strong>94%</strong><span>Te recomiendan</span></div>
+      <div class="hstat"><strong>+253</strong><span>Reseñas</span></div>
+      <div class="hstat"><strong>$$</strong><span>Precio justo</span></div>
+    </div>
+  </div>
+
+  <div class="hero-nav" aria-hidden="true">
+    <div class="hero-nav-line"></div>
+    <small>scroll</small>
   </div>
 </section>
 
-<!-- ═══ INFO STRIP ══════════════════════════ -->
-<div class="info-strip">
-  <div class="info-cell">
-    <div class="info-cell-icon">🕐</div>
-    <p class="info-cell-label">Horario</p>
-    <p class="info-cell-val">Mar–Dom<br>11am – 10pm</p>
-  </div>
-  <div class="info-cell">
-    <div class="info-cell-icon">📍</div>
-    <p class="info-cell-label">Ubicación</p>
-    <p class="info-cell-val">Av. 1, Liberia<br>Guanacaste</p>
-  </div>
-  <div class="info-cell">
-    <div class="info-cell-icon">📞</div>
-    <p class="info-cell-label">Teléfono</p>
-    <p class="info-cell-val"><a href="tel:+50671082151" style="color:var(--gold-lt)">+506 7108-2151</a></p>
-  </div>
-  <div class="info-cell">
-    <div class="info-cell-icon">🔥</div>
-    <p class="info-cell-label">Especialidad</p>
-    <p class="info-cell-val">Carnes a la<br>Parrilla</p>
-  </div>
-</div>
 
-<!-- ═══ MENÚ ════════════════════════════════ -->
-<section id="menu">
-  <div class="sec-header">
-    <p class="sec-badge">Selección</p>
-    <h2 class="sec-title">Nuestra Carta</h2>
-  </div>
-  <div class="menu-filters">
-    <button class="filter-btn active" onclick="filterMenu('todos',this)">Todos</button>
-    <button class="filter-btn" onclick="filterMenu('parrilla',this)">Parrilla</button>
-    <button class="filter-btn" onclick="filterMenu('pastas',this)">Pastas</button>
-    <button class="filter-btn" onclick="filterMenu('hamburguesas',this)">Hamburguesas</button>
-    <button class="filter-btn" onclick="filterMenu('carnes',this)">Carnes</button>
-    <button class="filter-btn" onclick="filterMenu('bebidas',this)">Bebidas</button>
-  </div>
-  <div class="menu-grid" id="menuGrid">
+<!-- ══════════════════════════════════
+     1. QUIÉNES SOMOS
+══════════════════════════════════ -->
+<section id="nosotros" aria-labelledby="nosotros-title">
+  <div class="about-grid">
 
-    <div class="menu-card" data-cat="parrilla" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=700&q=80" alt="Churrasco Don Fran" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Parrilla</p>
-        <h3 class="menu-card-name">Churrasco Don Fran</h3>
-        <p class="menu-card-desc">Corte insignia de la casa. Res local a la parrilla con chimichurri, papa rústica y ensalada fresca.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-churrasco">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Churrasco Don Fran','price-churrasco')">Agregar</button>
+    <!-- Imagen — cult-ui TextureCard -->
+    <div class="about-img-col rv">
+      <div class="about-img-frame">
+        <div class="about-img-inner">
+          <img
+            src="img/nosotros-carne.jpg"
+            alt="Parrilla con carnes en Don Fran Restaurante, Liberia"
+            loading="lazy"
+          >
         </div>
+      </div>
+      <div class="about-badge">
+        Desde <strong>Liberia</strong>
+        <small>Guanacaste, CR</small>
       </div>
     </div>
 
-    <div class="menu-card" data-cat="parrilla" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=700&q=80" alt="Costilla BBQ" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Parrilla</p>
-        <h3 class="menu-card-name">Costilla BBQ</h3>
-        <p class="menu-card-desc">Costilla de cerdo en salsa BBQ artesanal de piña, con patacón y ensalada. Cocción lenta 8 horas.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-costilla">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Costilla BBQ','price-costilla')">Agregar</button>
-        </div>
-      </div>
-    </div>
+    <!-- Texto -->
+    <div class="about-text rv rv2">
+      <span class="sec-label">Quiénes somos</span>
+      <h2 id="nosotros-title" class="sec-title">Donde el fuego<br>cuenta una historia</h2>
 
-    <div class="menu-card" data-cat="parrilla" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=700&q=80" alt="NY Strip Steak" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Parrilla</p>
-        <h3 class="menu-card-name">NY Strip Steak</h3>
-        <p class="menu-card-desc">Certified Angus Beef. Punto de cocción a elección, papa rústica y chimichurri de la casa.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-nystrip">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('NY Strip Steak','price-nystrip')">Agregar</button>
-        </div>
-      </div>
-    </div>
+      <p>Don Fran nació de una sola idea: hacer las cosas bien. Sin atajos, sin artificios. Un corte de carne que se respeta, un ceviche que sabe a mar, y una mesa donde sentirse en casa desde el primer momento.</p>
+      <p>Estamos en el centro de Liberia, la ciudad blanca de Guanacaste. Nos buscan turistas del mundo entero. Nos repiten los locales que ya conocen el secreto.</p>
+      <p>Nuestra especialidad son las <strong>carnes a la parrilla</strong>, pero el menú va mucho más allá: ceviches, pastas, mariscos, hamburguesas gourmet y postres hechos en casa.</p>
 
-    <div class="menu-card" data-cat="carnes" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=700&q=80" alt="Lomo Saltado" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Carnes</p>
-        <h3 class="menu-card-name">Lomo Saltado</h3>
-        <p class="menu-card-desc">Tiras de res con cebolla morada, tomate, ají amarillo, cilantro fresco. Servido con arroz y papas fritas.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-lomo">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Lomo Saltado','price-lomo')">Agregar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-card" data-cat="carnes" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=700&q=80" alt="Carne Asada Don Fran" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Carnes</p>
-        <h3 class="menu-card-name">Carne Asada Don Fran</h3>
-        <p class="menu-card-desc">Carne asada estilo guanacasteco en salsa de la casa, patacones, ensalada y frijoles negros.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-carneasada">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Carne Asada Don Fran','price-carneasada')">Agregar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-card" data-cat="carnes" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?w=700&q=80" alt="Filete Teriyaki" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Carnes</p>
-        <h3 class="menu-card-name">Filete Teriyaki</h3>
-        <p class="menu-card-desc">Dados de res en salsa teriyaki con brócoli, zanahoria y ajonjolí negro. Acompañado de arroz.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-teriyaki">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Filete Teriyaki','price-teriyaki')">Agregar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-card" data-cat="pastas" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=700&q=80" alt="Pasta con Carne" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Pastas</p>
-        <h3 class="menu-card-name">Pasta con Carne</h3>
-        <p class="menu-card-desc">Spaghetti con tiras de res a la plancha, aceitunas verdes, tomate cherry, albahaca y pan de ajo.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-pastacarne">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Pasta con Carne','price-pastacarne')">Agregar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-card" data-cat="pastas" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=700&q=80" alt="Pasta con Pollo" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Pastas</p>
-        <h3 class="menu-card-name">Pasta con Pollo</h3>
-        <p class="menu-card-desc">Spaghetti con pollo a la plancha, brócoli, zanahoria y salsa al ajillo con pan de ajo artesanal.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-pastapollo">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Pasta con Pollo','price-pastapollo')">Agregar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-card" data-cat="hamburguesas" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&q=80" alt="Burger Angus DF" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Hamburguesas</p>
-        <h3 class="menu-card-name">Burger Angus DF</h3>
-        <p class="menu-card-desc">Certified Angus Beef 200g, queso americano, bacon ahumado, cebolla caramelizada y salsa DF.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-burgerangus">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Burger Angus DF','price-burgerangus')">Agregar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-card" data-cat="hamburguesas" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=700&q=80" alt="Burger de Pollo Crispy" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Hamburguesas</p>
-        <h3 class="menu-card-name">Pollo Crispy</h3>
-        <p class="menu-card-desc">Pechuga de pollo empanada en panko, lechuga hidropónica, pepinillo, cebolla morada y mayo especial.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-pollocrispy">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Pollo Crispy','price-pollocrispy')">Agregar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-card" data-cat="bebidas" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=700&q=80" alt="Gin Tonic Beefeater Pink" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Bebidas</p>
-        <h3 class="menu-card-name">Gin Tonic Beefeater Pink</h3>
-        <p class="menu-card-desc">Beefeater Pink, San Pellegrino Tónica, fresas frescas, hielo y botánicos de la casa.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-gintonic">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Gin Tonic Beefeater Pink','price-gintonic')">Agregar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-card" data-cat="bebidas" onclick="expandCard(this)">
-      <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=700&q=80" alt="Frangelico On the Rocks" loading="lazy"/>
-      <div class="menu-card-fade"></div>
-      <div class="menu-card-body">
-        <p class="menu-card-cat">Bebidas</p>
-        <h3 class="menu-card-name">Frangelico On the Rocks</h3>
-        <p class="menu-card-desc">Licor de avellana italiana Frangelico servido sobre hielo esférico con rodaja de naranja deshidratada.</p>
-        <div class="menu-card-foot">
-          <span class="menu-card-price" id="price-frangelico">₡0.00</span>
-          <button class="btn-add" onclick="event.stopPropagation();addToCart('Frangelico On the Rocks','price-frangelico')">Agregar</button>
-        </div>
+      <!-- cult-ui Pills -->
+      <div class="about-pills">
+        <div class="pill"><span>🥩</span> Carnes a la parrilla</div>
+        <div class="pill"><span>🦐</span> Mariscos frescos</div>
+        <div class="pill"><span>🍔</span> Hamburguesas gourmet</div>
+        <div class="pill"><span>🍝</span> Pastas &amp; arroces</div>
+        <div class="pill"><span>🍮</span> Postres caseros</div>
+        <div class="pill"><span>❄️</span> Aire acondicionado</div>
+        <div class="pill"><span>🎉</span> Eventos privados</div>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ═══ BANNER ══════════════════════════════ -->
-<div class="banner-cta">
-  <div class="banner-cta-bg"></div>
-  <div class="banner-cta-inner">
-    <p class="banner-cta-quote">"Cada corte, cada llama, cada sorbo cuenta la historia de Guanacaste."</p>
-    <p class="banner-cta-attr">— Don Fran Restaurante</p>
-    <a href="#reservaciones" class="btn-primary">Reservar Ahora</a>
-  </div>
-</div>
 
-<!-- ═══ EXPERIENCIAS ════════════════════════ -->
-<section id="experiencias">
-  <div class="sec-header">
-    <p class="sec-badge">Exclusivo</p>
-    <h2 class="sec-title">Experiencias</h2>
-  </div>
-  <p class="scroll-hint"><span>←</span> Desliza para explorar <span>→</span></p>
-  <div class="gallery-scroll">
-    <div class="gallery-card">
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80" alt="Cena Privada" loading="lazy"/>
-      <div class="gallery-card-overlay"></div>
-      <div class="gallery-card-body"><p class="gallery-card-tag">Experiencia</p><h3 class="gallery-card-name">Cena Privada</h3></div>
+<!-- ══════════════════════════════════
+     2. MENÚ
+══════════════════════════════════ -->
+<section id="menu" aria-labelledby="menu-title">
+  <div class="menu-inner">
+
+    <div class="menu-hd rv">
+      <span class="sec-label">Lo que servimos</span>
+      <h2 id="menu-title" class="sec-title">El menú</h2>
+      <p class="sec-sub">Desde la parrilla hasta el mar. Todo hecho con ingredientes frescos y mucho cariño.</p>
     </div>
-    <div class="gallery-card">
-      <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&q=80" alt="Maridaje de Vinos" loading="lazy"/>
-      <div class="gallery-card-overlay"></div>
-      <div class="gallery-card-body"><p class="gallery-card-tag">Maridaje</p><h3 class="gallery-card-name">Maridaje de Vinos</h3></div>
+
+    <!-- Tabs — cult-ui Direction-Aware -->
+    <div class="tab-bar rv" role="tablist" aria-label="Categorías del menú">
+      <button class="tab on" data-t="carnes"       role="tab" aria-selected="true"  aria-controls="p-carnes">       <span>🥩 Carnes</span></button>
+      <button class="tab"    data-t="mariscos"     role="tab" aria-selected="false" aria-controls="p-mariscos">     <span>🦐 Mariscos</span></button>
+      <button class="tab"    data-t="hamburguesas" role="tab" aria-selected="false" aria-controls="p-hamburguesas"> <span>🍔 Hamburguesas</span></button>
+      <button class="tab"    data-t="pastas"       role="tab" aria-selected="false" aria-controls="p-pastas">       <span>🍝 Pastas</span></button>
+      <button class="tab"    data-t="postres"      role="tab" aria-selected="false" aria-controls="p-postres">      <span>🍮 Postres</span></button>
     </div>
-    <div class="gallery-card">
-      <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=500&q=80" alt="Chef's Table" loading="lazy"/>
-      <div class="gallery-card-overlay"></div>
-      <div class="gallery-card-body"><p class="gallery-card-tag">Chef's Table</p><h3 class="gallery-card-name">Mesa del Chef</h3></div>
+
+    <!-- ── Panel: Carnes ── -->
+    <div id="p-carnes" class="panel on menu-grid" role="tabpanel">
+
+      <div class="mc rv">
+        <div class="mc-img"><img src="img/menu-ny-strip.jpg"  alt="NY Strip Steak" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>NY Strip Steak</h3><span class="mc-price">₡12,500</span></div>
+          <p>El favorito de la casa. Jugoso, con ese punto que solo el fuego de verdad da. Con guarnición y ensalada fresca.</p>
+          <span class="mc-tag">⭐ El más pedido</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv2">
+        <div class="mc-img"><img src="img/menu-lomito.jpg" alt="Lomito a la parrilla" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Lomito a la Parrilla</h3><span class="mc-price">₡14,000</span></div>
+          <p>Corte suave y delicado, sellado con mantequilla de ajo. Papas doradas y vegetales salteados incluidos.</p>
+          <span class="mc-tag">Parrilla</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv3">
+        <div class="mc-img"><img src="img/menu-costillas.jpg" alt="Costillas BBQ" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Costillas BBQ</h3><span class="mc-price">₡13,500</span></div>
+          <p>Costillas de cerdo marinadas 24 h, caramelizadas lento con salsa BBQ de la casa. Ideales para compartir.</p>
+          <span class="mc-tag">Para compartir</span>
+        </div>
+      </div>
+
+    </div><!-- /p-carnes -->
+
+    <!-- ── Panel: Mariscos ── -->
+    <div id="p-mariscos" class="panel menu-grid" role="tabpanel" hidden>
+
+      <div class="mc rv">
+        <div class="mc-img"><img src="img/menu-ceviche.jpg" alt="Ceviche de mariscos" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Ceviche de Mariscos</h3><span class="mc-price">₡7,500</span></div>
+          <p>Corvina, camarones y pulpo marinados en limón con chile dulce y culantro. Acompañado de patacones crujientes.</p>
+          <span class="mc-tag">🌊 Fresco del día</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv2">
+        <div class="mc-img"><img src="img/menu-camarones.jpg" alt="Camarones al ajillo" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Camarones al Ajillo</h3><span class="mc-price">₡9,800</span></div>
+          <p>Camarones jumbo en aceite de oliva con ajo, mantequilla y limón. Con arroz blanco.</p>
+          <span class="mc-tag">Marisco</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv3">
+        <div class="mc-img"><img src="img/menu-pescado.jpg" alt="Filete de pescado" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Filete de Pescado</h3><span class="mc-price">₡9,200</span></div>
+          <p>Pescado fresco local a la plancha o frito. Con ensalada, arroz y patacones. Sencillo y honesto.</p>
+          <span class="mc-tag">Del Pacífico</span>
+        </div>
+      </div>
+
+    </div><!-- /p-mariscos -->
+
+    <!-- ── Panel: Hamburguesas ── -->
+    <div id="p-hamburguesas" class="panel menu-grid" role="tabpanel" hidden>
+
+      <div class="mc rv">
+        <div class="mc-img"><img src="img/menu-burger-donfran.jpg" alt="Hamburguesa Don Fran" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Hamburguesa Don Fran</h3><span class="mc-price">₡8,900</span></div>
+          <p>Con patacón de plátano, tocino, cebolla caramelizada y queso fundido. La que más extrañan cuando se van.</p>
+          <span class="mc-tag">⭐ La legendaria</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv2">
+        <div class="mc-img"><img src="img/menu-burger-guanacaste.jpg" alt="Hamburguesa Guanacasteca" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Guanacasteca</h3><span class="mc-price">₡8,200</span></div>
+          <p>Res de Guanacaste, guacamole, queso criollo, lechuga y tomate. Pan brioche y papas fritas incluidas.</p>
+          <span class="mc-tag">Gourmet</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv3">
+        <div class="mc-img"><img src="img/menu-burger-bbq.jpg" alt="BBQ Doble" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>BBQ Doble</h3><span class="mc-price">₡10,500</span></div>
+          <p>Dos medallones de res, doble queso, salsa BBQ de la casa y aros de cebolla. Para los que no miden.</p>
+          <span class="mc-tag">Para los valientes</span>
+        </div>
+      </div>
+
+    </div><!-- /p-hamburguesas -->
+
+    <!-- ── Panel: Pastas ── -->
+    <div id="p-pastas" class="panel menu-grid" role="tabpanel" hidden>
+
+      <div class="mc rv">
+        <div class="mc-img"><img src="img/menu-pasta-arrabiata.jpg" alt="Pasta Arrabiata" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Pasta Arrabiata</h3><span class="mc-price">₡7,800</span></div>
+          <p>Penne en salsa de tomate con ajo, chile y albahaca fresca. Opción vegetariana disponible.</p>
+          <span class="mc-tag">🌿 Vegetariana</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv2">
+        <div class="mc-img"><img src="img/menu-arroz-mariscos.jpg" alt="Arroz con Mariscos" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Arroz con Mariscos</h3><span class="mc-price">₡10,200</span></div>
+          <p>Arroz sofrito con camarones, calamar, almejas y corvina. Con caldo de mar y toque de azafrán.</p>
+          <span class="mc-tag">Mar en plato</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv3">
+        <div class="mc-img"><img src="img/menu-pasta-camarones.jpg" alt="Pasta con Camarones" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Pasta con Camarones</h3><span class="mc-price">₡9,500</span></div>
+          <p>Linguine con camarones en crema, tomate seco y albahaca. Favorita del almuerzo.</p>
+          <span class="mc-tag">Pasta</span>
+        </div>
+      </div>
+
+    </div><!-- /p-pastas -->
+
+    <!-- ── Panel: Postres ── -->
+    <div id="p-postres" class="panel menu-grid" role="tabpanel" hidden>
+
+      <div class="mc rv">
+        <div class="mc-img"><img src="img/menu-tres-leches.jpg" alt="Tres Leches casero" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Tres Leches Casero</h3><span class="mc-price">₡3,200</span></div>
+          <p>El postre que se acaba primero. Esponja empapada, crema chantilly y canela. Receta de la abuela.</p>
+          <span class="mc-tag">🏠 Hecho en casa</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv2">
+        <div class="mc-img"><img src="img/menu-flan.jpg" alt="Flan de Vainilla" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Flan de Vainilla</h3><span class="mc-price">₡2,800</span></div>
+          <p>Flan artesanal con caramelo oscuro y vainilla costarricense. La forma perfecta de cerrar la visita.</p>
+          <span class="mc-tag">Postre</span>
+        </div>
+      </div>
+
+      <div class="mc rv rv3">
+        <div class="mc-img"><img src="img/menu-brownie.jpg" alt="Brownie con Helado" loading="lazy"></div>
+        <div class="mc-body">
+          <div class="mc-row"><h3>Brownie con Helado</h3><span class="mc-price">₡3,800</span></div>
+          <p>Brownie de chocolate oscuro tibio con helado de vainilla y caramelo. El contraste que enamora.</p>
+          <span class="mc-tag">Favorito</span>
+        </div>
+      </div>
+
+    </div><!-- /p-postres -->
+
+  </div><!-- /menu-inner -->
+</section>
+
+
+<!-- ══════════════════════════════════
+     3. RESERVACIONES
+══════════════════════════════════ -->
+<section id="reservaciones" aria-labelledby="res-title">
+  <div class="reserva-grid">
+
+    <!-- Columna izquierda: info -->
+    <div class="rv">
+      <span class="sec-label">Mesa lista</span>
+      <h2 id="res-title" class="sec-title">Hacé tu reserva</h2>
+      <p class="sec-sub">Escribinos y en minutos confirmamos tu mesa. También podés llamarnos directo.</p>
+
+      <div class="reserva-info">
+        <div class="ri">
+          <div class="ri-icon">📞</div>
+          <div>
+            <strong>Teléfono / WhatsApp</strong>
+            <a href="tel:+50671082151">+506 7108 2151</a>
+          </div>
+        </div>
+        <div class="ri">
+          <div class="ri-icon">✉️</div>
+          <div>
+            <strong>Correo</strong>
+            <a href="mailto:donfranrestaurante@gmail.com">donfranrestaurante@gmail.com</a>
+          </div>
+        </div>
+        <div class="ri">
+          <div class="ri-icon">🕐</div>
+          <div>
+            <strong>Horario</strong>
+            <span>Lun – Dom · 11:30 AM – 10:00 PM</span>
+          </div>
+        </div>
+        <div class="ri">
+          <div class="ri-icon">📍</div>
+          <div>
+            <strong>Dirección</strong>
+            <span>75m oeste de la antigua comandancia, Liberia, Guanacaste</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="gallery-card">
-      <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&q=80" alt="Eventos Privados" loading="lazy"/>
-      <div class="gallery-card-overlay"></div>
-      <div class="gallery-card-body"><p class="gallery-card-tag">Eventos</p><h3 class="gallery-card-name">Eventos Privados</h3></div>
+
+    <!-- Columna derecha: formulario — cult-ui FloatingPanel -->
+    <div class="reserva-card rv rv2">
+      <h3>Reservar una mesa</h3>
+      <p>Completá el formulario y te contactamos por WhatsApp en minutos.</p>
+
+      <form id="res-form" novalidate>
+
+        <div class="fg-row">
+          <div class="fg">
+            <label for="r-nombre">Nombre</label>
+            <input type="text" id="r-nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="fg">
+            <label for="r-personas">Personas</label>
+            <select id="r-personas" name="personas">
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3-4" selected>3 – 4 personas</option>
+              <option value="5-8">5 – 8 personas</option>
+              <option value="9+">9 o más</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fg-row">
+          <div class="fg">
+            <label for="r-fecha">Fecha</label>
+            <input type="date" id="r-fecha" name="fecha" required>
+          </div>
+          <div class="fg">
+            <label for="r-hora">Hora</label>
+            <select id="r-hora" name="hora">
+              <option>11:30 AM</option>
+              <option>12:00 PM</option>
+              <option>12:30 PM</option>
+              <option>1:00 PM</option>
+              <option>7:00 PM</option>
+              <option>7:30 PM</option>
+              <option>8:00 PM</option>
+              <option>8:30 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fg">
+          <label for="r-tel">Teléfono / WhatsApp</label>
+          <input type="tel" id="r-tel" name="telefono" placeholder="+506 XXXX XXXX" required>
+        </div>
+
+        <div class="fg">
+          <label for="r-nota">Algo que debamos saber <small>(opcional)</small></label>
+          <textarea id="r-nota" name="nota" placeholder="Ocasión especial, alergias, preferencias de mesa…"></textarea>
+        </div>
+
+        <button type="submit" class="wapbtn" id="res-btn">
+          <!-- WhatsApp SVG -->
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="white" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Reservar por WhatsApp
+        </button>
+
+        <p class="form-note">También podés llamarnos al +506 7108 2151</p>
+      </form>
     </div>
-    <div class="gallery-card">
-      <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&q=80" alt="Postres" loading="lazy"/>
-      <div class="gallery-card-overlay"></div>
-      <div class="gallery-card-body"><p class="gallery-card-tag">Dulce Final</p><h3 class="gallery-card-name">Postres Artesanales</h3></div>
-    </div>
+
   </div>
 </section>
 
-<!-- ═══ NOSOTROS ════════════════════════════ -->
-<section id="nosotros">
-  <div class="sec-header">
-    <p class="sec-badge">Historia</p>
-    <h2 class="sec-title">El Alma de Liberia</h2>
-  </div>
-  <div class="about-section">
-    <img class="about-img" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=900&q=80" alt="Restaurante Don Fran" loading="lazy"/>
-    <div>
-      <p class="about-eyebrow">Don Fran Restaurante</p>
-      <h2 class="about-title">Auténtico<br>Guanacaste</h2>
-      <div class="about-line"></div>
-      <p class="about-text">En el corazón de Liberia, Don Fran Restaurante es un encuentro con la gastronomía costarricense en su expresión más auténtica. Nacimos de la pasión por el fuego, la buena carne y el sabor que solo Guanacaste puede ofrecer.</p>
-      <p class="about-text">Nuestras carnes son seleccionadas de los mejores productores locales, preparadas con técnicas artesanales que honran la tradición. Cada visita es una celebración.</p>
-      <a href="#reservaciones" class="about-link">Hacer una Reservación →</a>
+
+<!-- ══════════════════════════════════
+     4. EVENTOS PRIVADOS
+══════════════════════════════════ -->
+<section id="eventos" aria-labelledby="ev-title">
+  <div class="eventos-inner">
+
+    <div class="eventos-header rv">
+      <span class="sec-label">Eventos privados</span>
+      <h2 id="ev-title" class="sec-title">Tu celebración,<br>en nuestra casa</h2>
+      <p class="sec-sub">Disponemos del espacio completo para que tu evento sea exactamente como lo imaginás. Desde cumpleaños hasta reuniones corporativas.</p>
     </div>
+
+    <!-- Cards — cult-ui glass + texture -->
+    <div class="eventos-grid">
+
+      <div class="ev-card rv">
+        <div class="ev-icon">🎂</div>
+        <h3>Cumpleaños &amp; Celebraciones</h3>
+        <p>Decoración personalizada, menú especial y atención dedicada para hacer de tu día algo que nadie olvide.</p>
+        <div class="ev-includes">
+          <span class="ev-tag">🎈 Decoración</span>
+          <span class="ev-tag">🍰 Pastel</span>
+          <span class="ev-tag">🥂 Brindis</span>
+        </div>
+      </div>
+
+      <div class="ev-card rv rv2">
+        <div class="ev-icon">💍</div>
+        <h3>Aniversarios &amp; Cenas Románticas</h3>
+        <p>Mesa privada, iluminación especial y un menú diseñado para la ocasión. Porque algunos momentos merecen más que lo ordinario.</p>
+        <div class="ev-includes">
+          <span class="ev-tag">🕯️ Ambiente</span>
+          <span class="ev-tag">🌹 Decoración</span>
+          <span class="ev-tag">🍷 Vinos</span>
+        </div>
+      </div>
+
+      <div class="ev-card rv rv3">
+        <div class="ev-icon">💼</div>
+        <h3>Reuniones Corporativas</h3>
+        <p>Privacidad, servicio profesional y menú ejecutivo. El lugar ideal para cerrar acuerdos con buen sabor.</p>
+        <div class="ev-includes">
+          <span class="ev-tag">📋 Menú ejecutivo</span>
+          <span class="ev-tag">🔒 Privado</span>
+          <span class="ev-tag">☕ Coffee break</span>
+        </div>
+      </div>
+
+      <div class="ev-card rv rv4">
+        <div class="ev-icon">🎊</div>
+        <h3>Fiestas &amp; Graduaciones</h3>
+        <p>Grupos grandes bienvenidos. Coordinamos música, buffet personalizado y bebidas para que solo tengas que disfrutar.</p>
+        <div class="ev-includes">
+          <span class="ev-tag">🎵 Música</span>
+          <span class="ev-tag">🍽️ Buffet</span>
+          <span class="ev-tag">👥 Grupos grandes</span>
+        </div>
+      </div>
+
+    </div><!-- /eventos-grid -->
+
+    <div class="eventos-cta rv">
+      <a
+        href="https://wa.me/50671082151?text=Hola%20Don%20Fran!%20Quiero%20consultar%20sobre%20eventos%20privados."
+        target="_blank" rel="noopener"
+        class="btn-terra"
+        style="font-size:.9rem; padding:.8rem 2rem;"
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="white" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Consultar disponibilidad
+      </a>
+      <p>Respondemos en menos de 2 horas · Grupos desde 10 personas</p>
+    </div>
+
   </div>
 </section>
 
-<!-- ═══ RESERVACIONES ════════════════════════ -->
-<section id="reservaciones" class="res-section">
-  <div class="sec-header" style="background:transparent;padding-bottom:1rem">
-    <p class="sec-badge">Reservaciones</p>
-    <h2 class="sec-title">Reserva tu Mesa</h2>
-  </div>
-  <div class="res-form-wrap">
-    <div class="res-tabs">
-      <button class="res-tab active" onclick="switchResTab('mesa',this)">Mesa</button>
-      <button class="res-tab" onclick="switchResTab('evento',this)">Evento Privado</button>
+
+<!-- ══════════════════════════════════
+     5. UBICACIÓN + REDES SOCIALES
+══════════════════════════════════ -->
+<section id="ubicacion" aria-labelledby="ubic-title">
+  <div class="ubic-inner">
+
+    <div class="ubic-header rv">
+      <span class="sec-label">Encuéntranos</span>
+      <h2 id="ubic-title" class="sec-title">Dónde estamos</h2>
+      <p class="sec-sub">En el corazón de Liberia, a minutos del Parque Central y del aeropuerto Daniel Oduber.</p>
     </div>
 
-    <!-- FORM MESA -->
-    <form id="formMesa" onsubmit="submitReservation(event,'mesa')">
-      <div class="form-row">
-        <label class="form-label">Nombre completo</label>
-        <input class="form-input" type="text" name="nombre" placeholder="Tu nombre" required/>
-      </div>
-      <div class="form-row-2">
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Teléfono (WhatsApp)</label>
-          <input class="form-input" type="tel" name="telefono" placeholder="+506 XXXX-XXXX" required/>
-        </div>
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Personas</label>
-          <select class="form-select" name="personas">
-            <option value="1">1 persona</option>
-            <option value="2" selected>2 personas</option>
-            <option value="3">3 personas</option>
-            <option value="4">4 personas</option>
-            <option value="5">5 personas</option>
-            <option value="6+">6 o más</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row" style="margin-top:1.2rem">
-        <label class="form-label">Fecha</label>
-        <input class="form-input" type="date" name="fecha" required/>
-      </div>
-      <div class="form-row">
-        <label class="form-label">Hora</label>
-        <select class="form-select" name="hora">
-          <option>11:00 AM</option><option>11:30 AM</option>
-          <option>12:00 PM</option><option>12:30 PM</option>
-          <option>1:00 PM</option><option>1:30 PM</option>
-          <option>2:00 PM</option><option>5:00 PM</option>
-          <option>5:30 PM</option><option>6:00 PM</option>
-          <option>6:30 PM</option><option>7:00 PM</option>
-          <option>7:30 PM</option><option>8:00 PM</option>
-          <option>8:30 PM</option><option>9:00 PM</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label class="form-label">Notas especiales (opcional)</label>
-        <textarea class="form-textarea" name="notas" placeholder="Alergias, celebraciones, solicitudes especiales..."></textarea>
-      </div>
-      <button type="submit" class="form-submit">Solicitar Reservación</button>
-    </form>
+    <div class="ubic-grid">
 
-    <!-- FORM EVENTO -->
-    <form id="formEvento" class="hidden" onsubmit="submitReservation(event,'evento')">
-      <div class="form-row">
-        <label class="form-label">Nombre del organizador</label>
-        <input class="form-input" type="text" name="nombre" placeholder="Tu nombre" required/>
-      </div>
-      <div class="form-row">
-        <label class="form-label">Teléfono (WhatsApp)</label>
-        <input class="form-input" type="tel" name="telefono" placeholder="+506 XXXX-XXXX" required/>
-      </div>
-      <div class="form-row-2">
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Tipo de evento</label>
-          <select class="form-select" name="tipo_evento">
-            <option>Cumpleaños</option>
-            <option>Aniversario</option>
-            <option>Corporativo</option>
-            <option>Boda</option>
-            <option>Quinceaños</option>
-            <option>Otro</option>
-          </select>
+      <!-- Izquierda: info + redes -->
+      <div class="rv">
+        <div class="ubic-items">
+          <div class="ui-item">
+            <div class="ui-icon">📍</div>
+            <div>
+              <strong>Dirección</strong>
+              <span>75 metros oeste de la antigua comandancia (museo), Liberia, Guanacaste 50101, Costa Rica</span>
+            </div>
+          </div>
+          <div class="ui-item">
+            <div class="ui-icon">📞</div>
+            <div>
+              <strong>Teléfono</strong>
+              <a href="tel:+50671082151">+506 7108 2151</a>
+            </div>
+          </div>
+          <div class="ui-item">
+            <div class="ui-icon">✉️</div>
+            <div>
+              <strong>Correo electrónico</strong>
+              <a href="mailto:donfranrestaurante@gmail.com">donfranrestaurante@gmail.com</a>
+            </div>
+          </div>
+          <div class="ui-item">
+            <div class="ui-icon">🕐</div>
+            <div>
+              <strong>Horario</strong>
+              <span>Lunes a Domingo · 11:30 AM – 10:00 PM</span>
+            </div>
+          </div>
         </div>
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">N° invitados</label>
-          <input class="form-input" type="number" name="invitados" placeholder="Ej: 30" min="10" required/>
-        </div>
-      </div>
-      <div class="form-row" style="margin-top:1.2rem">
-        <label class="form-label">Fecha del evento</label>
-        <input class="form-input" type="date" name="fecha" required/>
-      </div>
-      <div class="form-row">
-        <label class="form-label">Hora de inicio</label>
-        <select class="form-select" name="hora">
-          <option>11:00 AM</option><option>12:00 PM</option>
-          <option>1:00 PM</option><option>5:00 PM</option>
-          <option>6:00 PM</option><option>7:00 PM</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label class="form-label">Cuéntanos sobre tu evento</label>
-        <textarea class="form-textarea" name="descripcion" placeholder="Decoración, menú preferido, requisitos especiales..." style="min-height:110px"></textarea>
-      </div>
-      <button type="submit" class="form-submit">Solicitar Cotización</button>
-    </form>
 
-    <div class="res-success" id="resSuccess">
-      <div class="res-success-icon">🕯️</div>
-      <p class="res-success-title">¡Solicitud Recibida!</p>
-      <p class="res-success-text">Hemos recibido tu solicitud de reservación.<br>El equipo de Don Fran la revisará y te confirmará<br>a la brevedad por WhatsApp al número que indicaste.</p>
-    </div>
-  </div>
+        <!-- Redes sociales — cult-ui cards -->
+        <div class="redes-section">
+          <h4>Seguinos en redes</h4>
+          <div class="redes-grid">
+
+            <a href="https://www.instagram.com/donfranrestaurante/" target="_blank" rel="noopener" class="red-card" aria-label="Instagram">
+              <div class="red-icon ig">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </div>
+              <div><span class="red-name">Instagram</span><span class="red-handle">@donfranrestaurante</span></div>
+            </a>
+
+            <a href="https://www.facebook.com/asadosdonfran/" target="_blank" rel="noopener" class="red-card" aria-label="Facebook">
+              <div class="red-icon fb">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </div>
+              <div><span class="red-name">Facebook</span><span class="red-handle">Don Fran Restaurante</span></div>
+            </a>
+
+            <a href="https://wa.me/50671082151" target="_blank" rel="noopener" class="red-card" aria-label="WhatsApp">
+              <div class="red-icon wa">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+              </div>
+              <div><span class="red-name">WhatsApp</span><span class="red-handle">+506 7108 2151</span></div>
+            </a>
+
+            <a href="mailto:donfranrestaurante@gmail.com" class="red-card" aria-label="Correo electrónico">
+              <div class="red-icon em">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
+                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </div>
+              <div><span class="red-name">Correo</span><span class="red-handle">donfranrestaurante@gmail.com</span></div>
+            </a>
+
+          </div><!-- /redes-grid -->
+        </div><!-- /redes-section -->
+      </div><!-- /left col -->
+
+      <!-- Derecha: mapa -->
+      <div class="rv rv2">
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.5202!2d-85.43712!3d10.63428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f9e3d1a9e0b0001%3A0x1!2sDon+Fran+Restaurante%2C+Liberia%2C+Guanacaste!5e0!3m2!1ses!2scr!4v1"
+            title="Ubicación de Don Fran Restaurante en Liberia, Guanacaste"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <div class="map-actions">
+          <a href="https://maps.google.com/?q=Don+Fran+Restaurante+Liberia+Costa+Rica" target="_blank" rel="noopener" class="btn-outline" style="font-size:.82rem; padding:.6rem 1.4rem;">
+            Abrir en Maps →
+          </a>
+          <a href="https://wa.me/50671082151?text=Hola!%20Quiero%20saber%20cómo%20llegar%20a%20Don%20Fran." target="_blank" rel="noopener" class="btn-terra" style="font-size:.82rem; padding:.6rem 1.4rem;">
+            ¿Cómo llegar?
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /ubic-grid -->
+  </div><!-- /ubic-inner -->
 </section>
 
-<!-- ═══ FOOTER ══════════════════════════════ -->
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
 <footer>
-  <div class="foot-logo">Don Fran</div>
-  <p class="foot-tagline">Steak &amp; Grill — Alta Cocina Costarricense<br>Liberia, Guanacaste, Costa Rica</p>
-  <div class="foot-social">
-    <a href="https://www.instagram.com/donfranrestaurante/" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.facebook.com/asadosdonfran/" target="_blank" rel="noopener">Facebook</a>
-  </div>
-  <div class="foot-grid">
-    <div class="foot-col">
-      <p class="foot-col-title">Menú</p>
-      <ul>
-        <li><a href="#menu">Carnes a la Parrilla</a></li>
-        <li><a href="#menu">Hamburguesas</a></li>
-        <li><a href="#menu">Pastas</a></li>
-        <li><a href="#menu">Bebidas</a></li>
-      </ul>
+  <div class="ft-grid">
+
+    <div class="ft-brand">
+      <div class="name">Don Fran Restaurante</div>
+      <div class="tag">Liberia · Guanacaste · Costa Rica</div>
+      <p>Carnes a la parrilla, mariscos, hamburguesas gourmet y eventos privados en el corazón de Liberia. Donde el fuego cuenta una historia.</p>
+      <div class="ft-social">
+        <a href="https://www.instagram.com/donfranrestaurante/" target="_blank" rel="noopener" class="fts" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/asadosdonfran/" target="_blank" rel="noopener" class="fts" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://wa.me/50671082151" target="_blank" rel="noopener" class="fts" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
     </div>
-    <div class="foot-col">
-      <p class="foot-col-title">Experiencias</p>
+
+    <div class="ft-col">
+      <h4>Secciones</h4>
       <ul>
-        <li><a href="#experiencias">Cena Privada</a></li>
-        <li><a href="#experiencias">Chef's Table</a></li>
-        <li><a href="#reservaciones">Eventos</a></li>
+        <li><a href="#nosotros">Quiénes somos</a></li>
+        <li><a href="#menu">El menú</a></li>
         <li><a href="#reservaciones">Reservaciones</a></li>
+        <li><a href="#eventos">Eventos privados</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
       </ul>
     </div>
-    <div class="foot-col" style="grid-column:1/-1">
-      <p class="foot-col-title">Contacto</p>
-      <address class="foot-addr">
-        Avenida 1, 125m Oeste del Parque Central<br>
-        Liberia, Guanacaste, 50101 · Costa Rica<br><br>
-        <a href="tel:+50671082151" style="color:var(--gold)">+506 7108-2151</a><br>
-        <a href="mailto:donfranrestaurante@gmail.com" style="color:var(--cream-dk);font-size:.6rem">donfranrestaurante@gmail.com</a>
-      </address>
+
+    <div class="ft-col">
+      <h4>Menú</h4>
+      <ul>
+        <li><a href="#menu">Carnes a la parrilla</a></li>
+        <li><a href="#menu">Mariscos &amp; Ceviches</a></li>
+        <li><a href="#menu">Hamburguesas</a></li>
+        <li><a href="#menu">Pastas &amp; Arroces</a></li>
+        <li><a href="#menu">Postres</a></li>
+      </ul>
     </div>
-  </div>
-  <div class="foot-bottom">
-    <p class="foot-copy">© 2025 Don Fran Restaurante. Todos los derechos reservados.</p>
-    <div class="foot-legal">
-      <a href="#">Privacidad</a>
-      <a href="#">Términos</a>
+
+    <div class="ft-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="tel:+50671082151">+506 7108 2151</a></li>
+        <li><a href="mailto:donfranrestaurante@gmail.com">Correo electrónico</a></li>
+        <li><a href="https://wa.me/50671082151">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/donfranrestaurante/">Instagram</a></li>
+        <li><a href="https://www.facebook.com/asadosdonfran/">Facebook</a></li>
+      </ul>
     </div>
+
+  </div><!-- /ft-grid -->
+
+  <div class="ft-bottom">
+    <span>© 2025 Don Fran Restaurante · Liberia, Guanacaste, Costa Rica</span>
+    <span>Built with Claude Web Builder</span>
   </div>
 </footer>
 
-<!-- ═══ WHATSAPP FLOAT ══════════════════════ -->
-<a class="wa-float" href="https://wa.me/50671082151?text=Hola%20Don%20Fran%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+
+<!-- ── WhatsApp FAB ── -->
+<a
+  href="https://wa.me/50671082151?text=Hola%20Don%20Fran!%20Vi%20su%20web%20y%20quiero%20hacer%20una%20consulta."
+  target="_blank" rel="noopener"
+  class="wafab"
+  aria-label="Chatear por WhatsApp con Don Fran Restaurante"
+>
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
 </a>
 
-<!-- ═══ TOAST ════════════════════════════════ -->
-<div class="toast" id="toast"></div>
+<!-- Toast notification -->
+<div id="toast" role="status" aria-live="polite"></div>
 
-<!-- ═══════════════════════════════════════════
-     PANEL ADMIN
-══════════════════════════════════════════ -->
-<div id="admin-panel">
-  <div class="admin-topbar">
-    <span class="admin-topbar-title">🔥 Panel Don Fran</span>
-    <button class="admin-close" onclick="closeAdmin()">✕ Cerrar</button>
-  </div>
-
-  <!-- LOGIN -->
-  <div id="adminLogin" class="admin-login">
-    <div class="admin-login-box">
-      <p class="admin-login-title">Acceso Admin</p>
-      <div class="form-row">
-        <label class="form-label">Contraseña</label>
-        <input class="form-input" type="password" id="adminPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkLogin()"/>
-      </div>
-      <button class="form-submit" onclick="checkLogin()">Ingresar</button>
-      <p class="admin-login-err" id="loginErr">Contraseña incorrecta</p>
-    </div>
-  </div>
-
-  <!-- ADMIN CONTENT (tras login) -->
-  <div id="adminContent" class="hidden" style="flex:1;overflow-y:auto;display:flex;flex-direction:column">
-    <div class="admin-body">
-      <div class="admin-tabs">
-        <button class="admin-tab active" onclick="switchAdminTab('reservas',this)">Reservas <span id="pendingDot" class="notif-dot hidden"></span></button>
-        <button class="admin-tab" onclick="switchAdminTab('menu',this)">Precios Menú</button>
-      </div>
-
-      <!-- TAB RESERVAS -->
-      <div class="admin-section active" id="tab-reservas">
-        <div class="admin-stats">
-          <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total</div></div>
-          <div class="stat-card"><div class="stat-num" id="statPending" style="color:#EF9F27">0</div><div class="stat-label">Pendientes</div></div>
-          <div class="stat-card"><div class="stat-num" id="statConfirmed" style="color:#7dc443">0</div><div class="stat-label">Confirmadas</div></div>
-        </div>
-        <div id="reservasList"></div>
-      </div>
-
-      <!-- TAB PRECIOS MENU -->
-      <div class="admin-section hidden" id="tab-menu">
-        <p style="font-size:.65rem;letter-spacing:.1em;color:var(--cream-dk);margin-bottom:1.2rem;line-height:1.9">Edita los precios del menú. Los cambios se guardan en este dispositivo. Para que sean permanentes en todos los dispositivos, actualiza los valores en el código fuente (index.html) y sube a GitHub.</p>
-        <div class="admin-menu-grid" id="adminMenuList"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-// ═══════════════════════════════════════
-// DATOS
-// ═══════════════════════════════════════
-var reservations = JSON.parse(localStorage.getItem('df_reservations') || '[]');
-var menuPrices   = JSON.parse(localStorage.getItem('df_prices') || '{}');
-var cart = [];
-var cartCount = 0;
-var ADMIN_PASS = 'donfran2025'; // ← CAMBIA ESTA CONTRASEÑA
-
-var menuItems = [
-  {id:'churrasco', name:'Churrasco Don Fran', cat:'Parrilla', img:'https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=120&q=70'},
-  {id:'costilla',  name:'Costilla BBQ', cat:'Parrilla', img:'https://images.unsplash.com/photo-1558030006-450675393462?w=120&q=70'},
-  {id:'nystrip',   name:'NY Strip Steak', cat:'Parrilla', img:'https://images.unsplash.com/photo-1544025162-d76694265947?w=120&q=70'},
-  {id:'lomo',      name:'Lomo Saltado', cat:'Carnes', img:'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=120&q=70'},
-  {id:'carneasada',name:'Carne Asada Don Fran', cat:'Carnes', img:'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=120&q=70'},
-  {id:'teriyaki',  name:'Filete Teriyaki', cat:'Carnes', img:'https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?w=120&q=70'},
-  {id:'pastacarne',name:'Pasta con Carne', cat:'Pastas', img:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=120&q=70'},
-  {id:'pastapollo',name:'Pasta con Pollo', cat:'Pastas', img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=120&q=70'},
-  {id:'burgerangus',name:'Burger Angus DF', cat:'Hamburguesas', img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=120&q=70'},
-  {id:'pollocrispy',name:'Pollo Crispy', cat:'Hamburguesas', img:'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=120&q=70'},
-  {id:'gintonic',  name:'Gin Tonic Beefeater Pink', cat:'Bebidas', img:'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=120&q=70'},
-  {id:'frangelico',name:'Frangelico On the Rocks', cat:'Bebidas', img:'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=120&q=70'}
-];
-
-// Aplicar precios guardados al cargar
-(function(){
-  menuItems.forEach(function(item){
-    var el = document.getElementById('price-'+item.id);
-    if(el && menuPrices[item.id]) el.textContent = menuPrices[item.id];
-  });
-})();
-
-// ═══════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════
-function openSideNav(){
-  document.getElementById('sideNav').classList.add('open');
-  document.getElementById('sideNavOverlay').classList.add('open');
-}
-function closeSideNav(){
-  document.getElementById('sideNav').classList.remove('open');
-  document.getElementById('sideNavOverlay').classList.remove('open');
-}
-
-// ═══════════════════════════════════════
-// CARRITO
-// ═══════════════════════════════════════
-function openCart(){
-  document.getElementById('cartDrawer').classList.add('open');
-  document.getElementById('cartOverlay').classList.add('open');
-}
-function closeCart(){
-  document.getElementById('cartDrawer').classList.remove('open');
-  document.getElementById('cartOverlay').classList.remove('open');
-}
-function addToCart(name, priceId){
-  var priceEl = document.getElementById(priceId);
-  var priceRaw = priceEl ? priceEl.textContent : '₡0.00';
-  var existing = cart.find(function(i){return i.name===name});
-  if(existing){existing.qty++}else{cart.push({name:name,price:priceRaw,qty:1})}
-  cartCount++;
-  updateCartUI();
-  showToast(name+' agregado');
-}
-function removeFromCart(name){
-  cart = cart.filter(function(i){return i.name!==name});
-  cartCount = cart.reduce(function(s,i){return s+i.qty},0);
-  updateCartUI();
-}
-function updateCartUI(){
-  document.getElementById('cartBadge').textContent = String(cartCount).padStart(2,'0');
-  var list = document.getElementById('cartItemsList');
-  var totalRow = document.getElementById('cartTotalRow');
-  var checkBtn = document.getElementById('btnCheckout');
-  if(!cart.length){
-    list.innerHTML='<p class="cart-empty-msg">Tu canasta está vacía.<br>Explora nuestro menú y agrega tus favoritos.</p>';
-    totalRow.classList.add('hidden');checkBtn.classList.add('hidden');return;
-  }
-  totalRow.classList.remove('hidden');checkBtn.classList.remove('hidden');
-  list.innerHTML = cart.map(function(item){
-    return '<div class="cart-item"><div class="cart-item-info"><p class="cart-item-name">'+item.name+' × '+item.qty+'</p><p class="cart-item-price">'+item.price+'</p><button class="cart-item-rm" onclick="removeFromCart(\''+item.name.replace(/'/g,"\\'")+'\')" >Eliminar</button></div></div>';
-  }).join('');
-  document.getElementById('cartTotalAmt').textContent = cart.length ? 'Ver total en WhatsApp' : '₡0';
-}
-function sendCartWA(){
-  if(!cart.length)return;
-  var msg='Hola Don Fran! Quisiera ordenar:\n\n';
-  cart.forEach(function(item){msg+='• '+item.name+' × '+item.qty+' — '+item.price+'\n'});
-  msg+='\nPor favor confirmar disponibilidad. ¡Gracias!';
-  window.open('https://wa.me/50671082151?text='+encodeURIComponent(msg),'_blank');
-}
-
-// ═══════════════════════════════════════
-// MENÚ FILTERS
-// ═══════════════════════════════════════
-function filterMenu(cat, btn){
-  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
-  btn.classList.add('active');
-  document.querySelectorAll('.menu-card').forEach(function(card){
-    if(cat==='todos'||card.dataset.cat===cat){card.style.display=''}
-    else{card.style.display='none'}
-  });
-}
-function expandCard(card){
-  var isOpen=card.classList.contains('expanded');
-  document.querySelectorAll('.menu-card.expanded').forEach(function(c){c.classList.remove('expanded')});
-  if(!isOpen)card.classList.add('expanded');
-}
-
-// ═══════════════════════════════════════
-// TABS RESERVACIONES
-// ═══════════════════════════════════════
-function switchResTab(tab, btn){
-  document.querySelectorAll('.res-tab').forEach(function(b){b.classList.remove('active')});
-  btn.classList.add('active');
-  document.getElementById('formMesa').classList.toggle('hidden', tab!=='mesa');
-  document.getElementById('formEvento').classList.toggle('hidden', tab!=='evento');
-  document.getElementById('resSuccess').style.display='none';
-  document.getElementById('formMesa').style.display = tab==='mesa'?'':'';
-  document.getElementById('formEvento').classList.toggle('hidden', tab!=='evento');
-}
-
-// ═══════════════════════════════════════
-// SUBMIT RESERVA
-// ═══════════════════════════════════════
-function submitReservation(e, tipo){
-  e.preventDefault();
-  var form = e.target;
-  var data = {};
-  new FormData(form).forEach(function(v,k){data[k]=v});
-  data.id = 'DF-'+ Date.now().toString(36).toUpperCase();
-  data.tipo = tipo;
-  data.status = 'pending';
-  data.createdAt = new Date().toLocaleString('es-CR',{dateStyle:'short',timeStyle:'short'});
-  reservations.unshift(data);
-  localStorage.setItem('df_reservations', JSON.stringify(reservations));
-  form.reset();
-  var successEl = document.getElementById('resSuccess');
-  successEl.style.display='block';
-  setTimeout(function(){successEl.style.display='none'},6000);
-  showToast('¡Reserva recibida! Te confirmamos pronto.');
-}
-
-// ═══════════════════════════════════════
-// ADMIN
-// ═══════════════════════════════════════
-var adminLoggedIn = false;
-function openAdmin(){
-  document.getElementById('admin-panel').classList.add('open');
-  if(!adminLoggedIn){
-    document.getElementById('adminLogin').style.display='flex';
-    document.getElementById('adminContent').classList.add('hidden');
-  } else {
-    renderAdmin();
-  }
-}
-function closeAdmin(){document.getElementById('admin-panel').classList.remove('open')}
-function checkLogin(){
-  var pass = document.getElementById('adminPass').value;
-  if(pass===ADMIN_PASS){
-    adminLoggedIn=true;
-    document.getElementById('adminLogin').style.display='none';
-    document.getElementById('adminContent').classList.remove('hidden');
-    document.getElementById('adminContent').style.display='flex';
-    renderAdmin();
-  } else {
-    document.getElementById('loginErr').style.display='block';
-    document.getElementById('adminPass').value='';
-  }
-}
-function switchAdminTab(tab, btn){
-  document.querySelectorAll('.admin-tab').forEach(function(b){b.classList.remove('active')});
-  btn.classList.add('active');
-  document.querySelectorAll('.admin-section').forEach(function(s){s.classList.remove('active');s.classList.add('hidden')});
-  var el = document.getElementById('tab-'+tab);
-  el.classList.remove('hidden');el.classList.add('active');
-  if(tab==='menu')renderAdminMenu();
-}
-function renderAdmin(){
-  reservations = JSON.parse(localStorage.getItem('df_reservations')||'[]');
-  var pending = reservations.filter(function(r){return r.status==='pending'}).length;
-  var confirmed = reservations.filter(function(r){return r.status==='confirmed'}).length;
-  document.getElementById('statTotal').textContent = reservations.length;
-  document.getElementById('statPending').textContent = pending;
-  document.getElementById('statConfirmed').textContent = confirmed;
-  var dot = document.getElementById('pendingDot');
-  pending>0?dot.classList.remove('hidden'):dot.classList.add('hidden');
-  var list = document.getElementById('reservasList');
-  if(!reservations.length){
-    list.innerHTML='<div class="admin-empty">No hay reservas aún.<br>Aparecerán aquí cuando los clientes reserven.</div>';return;
-  }
-  list.innerHTML = reservations.map(function(r,idx){
-    var typeCls = r.tipo==='evento'?'type-evento':'type-mesa';
-    var typeLabel = r.tipo==='evento'?'Evento':'Mesa';
-    var statusCls = r.status==='confirmed'?'status-confirmed':r.status==='cancelled'?'status-cancelled':'status-pending';
-    var statusLabel = r.status==='confirmed'?'Confirmada':r.status==='cancelled'?'Cancelada':'Pendiente';
-    var extras = r.tipo==='evento'
-      ? '<div class="res-detail"><strong>'+r.tipo_evento+'</strong></div><div class="res-detail">Invitados: <strong>'+r.invitados+'</strong></div>'
-      : '<div class="res-detail">Personas: <strong>'+r.personas+'</strong></div>';
-    var confirmBtn = r.status==='pending'
-      ? '<button class="btn-confirm" onclick="confirmRes('+idx+')">✓ Confirmar</button>' : '';
-    var cancelBtn = r.status!=='cancelled'
-      ? '<button class="btn-cancel-res" onclick="cancelRes('+idx+')">Cancelar</button>' : '';
-    var waMsg = encodeURIComponent('Hola '+r.nombre+', tu reserva en Don Fran ('+r.fecha+' a las '+r.hora+') ');
-    return '<div class="res-card"><div class="res-card-head"><div><p class="res-card-name">'+r.nombre+'</p><p style="font-size:.6rem;color:var(--cream-dk);letter-spacing:.06em;margin-top:.15rem">'+r.id+' · '+r.createdAt+'</p></div><span class="res-card-type '+typeCls+'">'+typeLabel+'</span></div><div class="res-card-details"><div class="res-detail">Fecha: <strong>'+r.fecha+'</strong></div><div class="res-detail">Hora: <strong>'+r.hora+'</strong></div>'+extras+'</div><div class="res-card-status"><span class="status-badge '+statusCls+'">'+statusLabel+'</span></div><div class="res-card-actions">'+confirmBtn+'<a class="btn-wa-client" href="https://wa.me/'+formatWAPhone(r.telefono)+'?text='+waMsg+'" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> WhatsApp</a>'+cancelBtn+'</div></div>';
-  }).join('');
-}
-function formatWAPhone(tel){
-  return tel.replace(/[\s\-\+\(\)]/g,'');
-}
-function confirmRes(idx){
-  reservations[idx].status='confirmed';
-  localStorage.setItem('df_reservations',JSON.stringify(reservations));
-  renderAdmin();
-  showToast('Reserva confirmada');
-}
-function cancelRes(idx){
-  if(confirm('¿Cancelar esta reserva?')){
-    reservations[idx].status='cancelled';
-    localStorage.setItem('df_reservations',JSON.stringify(reservations));
-    renderAdmin();
-  }
-}
-function renderAdminMenu(){
-  menuPrices = JSON.parse(localStorage.getItem('df_prices')||'{}');
-  var container = document.getElementById('adminMenuList');
-  container.innerHTML = menuItems.map(function(item){
-    var current = menuPrices[item.id] || '₡0.00';
-    return '<div class="admin-menu-item"><img src="'+item.img+'" alt="'+item.name+'" loading="lazy"/><div class="admin-menu-item-info"><p class="admin-menu-item-name">'+item.name+'</p><p class="admin-menu-item-cat">'+item.cat+'</p><div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap"><input class="admin-price-input" id="pinput-'+item.id+'" type="text" value="'+current+'" placeholder="₡0.00"/><button class="btn-save-price" onclick="savePrice(\''+item.id+'\')">Guardar</button></div></div></div>';
-  }).join('');
-}
-function savePrice(id){
-  var val = document.getElementById('pinput-'+id).value.trim();
-  if(!val)return;
-  menuPrices[id]=val;
-  localStorage.setItem('df_prices',JSON.stringify(menuPrices));
-  var el = document.getElementById('price-'+id);
-  if(el)el.textContent=val;
-  showToast('Precio guardado');
-}
-
-// ═══════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════
-function showToast(msg){
-  var t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show')},2400);
-}
-
-// Fecha mínima = hoy
-(function(){
-  var today=new Date().toISOString().split('T')[0];
-  document.querySelectorAll('input[type="date"]').forEach(function(i){i.min=today});
-})();
-</script>
+<!-- Scripts -->
+<script src="main.js"></script>
 </body>
 </html>
